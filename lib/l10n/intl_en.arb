@@ -19,5 +19,6 @@
   "add_skill": "Add Skill",
   "skill_minimum_to_continue": "At least 1 skill is required to continue",
   "skills": "Skills",
+  "preview": "Preview",
   "end_of_file": ""
 }
