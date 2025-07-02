@@ -35,7 +35,7 @@ class DatePickerWidget extends StatelessWidget {
         }
       },
       validator: validator,
-      suffixIcon: Icon(Icons.date_range_rounded),
+      suffixIcon: const Icon(Icons.date_range_rounded),
     );
   }
 }

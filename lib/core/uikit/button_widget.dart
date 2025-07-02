@@ -23,7 +23,7 @@ class ButtonWidget extends StatelessWidget {
     } else if (buttonType == ButtonType.outlined) {
       return OutlinedButton(onPressed: onPressed, child: _child());
     }
-    return Placeholder();
+    return const Placeholder();
   }
 
   Widget _child() {
