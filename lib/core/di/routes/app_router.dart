@@ -9,5 +9,6 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
     AutoRoute(page: PersonalInfoRoute.page, initial: true),
     AutoRoute(page: SkillsRoute.page),
+    AutoRoute(page: PreviewRoute.page),
   ];
 }
