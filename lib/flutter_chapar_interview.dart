@@ -8,7 +8,7 @@ class FlutterChaparInterview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Chapar Interview',
       localizationsDelegates: const [
         S.delegate,
@@ -23,6 +23,7 @@ class FlutterChaparInterview extends StatelessWidget {
         appBarTheme: const AppBarTheme(centerTitle: true),
       ),
       home: const PersonalInfoPage(),
+      routerConfig: getIt<AppRouter>().config(),
     );
   }
 }

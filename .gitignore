@@ -36,6 +36,7 @@ migrate_working_dir/
 *.config.dart
 pubspec.lock
 *.freezed.dart
+*.gr.dart
 
 # Symbolication related
 app.*.symbols

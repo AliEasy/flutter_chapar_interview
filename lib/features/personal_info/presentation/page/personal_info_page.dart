@@ -1,6 +1,10 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chapar_interview/core/common/extensions/string_extension.dart';
 import 'package:flutter_chapar_interview/core/di/base/di_setup.dart';
+import 'package:flutter_chapar_interview/core/di/routes/app_router.gr.dart';
+import 'package:flutter_chapar_interview/core/entities/volunteer.dart';
 import 'package:flutter_chapar_interview/core/uikit/button_widget.dart';
 import 'package:flutter_chapar_interview/core/uikit/date_picker_widget.dart';
 import 'package:flutter_chapar_interview/core/uikit/scaffold_body_root_widget.dart';
@@ -10,6 +14,7 @@ import 'package:flutter_chapar_interview/features/personal_info/presentation/man
 import 'package:flutter_chapar_interview/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class PersonalInfoPage extends StatefulWidget {
   const PersonalInfoPage({super.key});
 
@@ -90,11 +95,27 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                         PersonalInfoFormValidatorState
                       >(
                         builder: (context, state) {
-                          final isEnabled = state.whenOrNull(valid: () => true,) ?? false;
+                          final isEnabled =
+                              state.whenOrNull(valid: () => true) ?? false;
                           return ButtonWidget(
                             buttonType: ButtonType.filled,
                             title: S.of(context).next,
-                            onPressed: isEnabled ? () {} : null,
+                            onPressed:
+                                isEnabled
+                                    ? () {
+                                      final volunteerEntity = VolunteerEntity(
+                                        fullName: _fullNameController.text,
+                                        email: _emailController.text,
+                                        phone: _phoneController.text,
+                                        birthday: _birthdayController.text,
+                                      );
+                                      context.pushRoute(
+                                        SkillsRoute(
+                                          volunteerEntity: volunteerEntity,
+                                        ),
+                                      );
+                                    }
+                                    : null,
                           );
                         },
                       ),
