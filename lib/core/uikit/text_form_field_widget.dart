@@ -9,6 +9,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final GestureTapCallback? onTap;
   final Widget? suffixIcon;
   final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
 
   const TextFormFieldWidget({
     super.key,
@@ -18,7 +19,9 @@ class TextFormFieldWidget extends StatelessWidget {
     this.autovalidateMode,
     this.readOnly = false,
     this.onTap,
-    this.suffixIcon, this.textInputAction,
+    this.suffixIcon,
+    this.textInputAction,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -30,6 +33,7 @@ class TextFormFieldWidget extends StatelessWidget {
       readOnly: readOnly,
       onTap: onTap,
       textInputAction: textInputAction,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(labelText: label, suffixIcon: suffixIcon),
     );
   }

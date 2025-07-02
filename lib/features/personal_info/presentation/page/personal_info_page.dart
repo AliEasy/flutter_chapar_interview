@@ -42,6 +42,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       controller: _fullNameController,
                       label: S.of(context).full_name,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         return context
                             .read<PersonalInfoFormValidatorCubit>()
@@ -53,6 +54,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       controller: _emailController,
                       label: S.of(context).email,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         return context
                             .read<PersonalInfoFormValidatorCubit>()
@@ -64,6 +66,10 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       controller: _phoneController,
                       label: S.of(context).phone,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (value) {
+                        FocusScope.of(context).unfocus();
+                      },
                       validator: (value) {
                         return context
                             .read<PersonalInfoFormValidatorCubit>()
