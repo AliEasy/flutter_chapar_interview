@@ -19,7 +19,7 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (buttonType == ButtonType.filled) {
-      return TextButton(onPressed: onPressed, child: _child());
+      return ElevatedButton(onPressed: onPressed, child: _child());
     } else if (buttonType == ButtonType.outlined) {
       return OutlinedButton(onPressed: onPressed, child: _child());
     }

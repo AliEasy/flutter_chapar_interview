@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chapar_interview/features/personal_info/presentation/page/personal_info_page.dart';
+import 'package:flutter_chapar_interview/core/di/base/di_setup.dart';
+import 'package:flutter_chapar_interview/core/di/routes/app_router.dart';
 import 'package:flutter_chapar_interview/generated/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -18,11 +19,23 @@ class FlutterChaparInterview extends StatelessWidget {
       ],
       supportedLocales: const [Locale('en')],
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         appBarTheme: const AppBarTheme(centerTitle: true),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ThemeData.light().colorScheme.primary,
+            foregroundColor: ThemeData.light().colorScheme.surface,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+        ),
       ),
-      home: const PersonalInfoPage(),
       routerConfig: getIt<AppRouter>().config(),
     );
   }
