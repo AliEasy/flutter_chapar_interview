@@ -12,6 +12,11 @@ class SkillManagerCubit extends Cubit<SkillManagerState> {
 
   final List<String> _skillList = [];
 
+  addInitialData(List<String> skills) {
+    _skillList.addAll(skills);
+    emit(SkillManagerState.skillsModified(skillList: _skillList));
+  }
+
   addOrRemoveSkill(String skill) {
     emit(const SkillManagerState.loading());
     if (skill.isNotEmpty) {
@@ -24,4 +29,6 @@ class SkillManagerCubit extends Cubit<SkillManagerState> {
       emit(SkillManagerState.skillsModified(skillList: _skillList));
     }
   }
+
+  List<String> get skillList => _skillList;
 }

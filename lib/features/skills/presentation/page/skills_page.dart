@@ -1,9 +1,9 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chapar_interview/core/di/base/di_setup.dart';
-import 'package:flutter_chapar_interview/core/entities/volunteer.dart';
+import 'package:flutter_chapar_interview/core/service/volunteer_data_service/entity/volunteer_entity.dart';
+import 'package:flutter_chapar_interview/core/service/volunteer_data_service/manager/volunteer_data_service_cubit.dart';
 import 'package:flutter_chapar_interview/core/uikit/button_widget.dart';
 import 'package:flutter_chapar_interview/core/uikit/scaffold_body_root_widget.dart';
 import 'package:flutter_chapar_interview/core/uikit/scaffold_bottom_navigator_bar_root_widget.dart';
@@ -28,7 +28,11 @@ class _SkillsPageState extends State<SkillsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<SkillManagerCubit>(),
+      create: (context) {
+        final cubit = getIt<SkillManagerCubit>();
+        cubit.addInitialData(widget.volunteerEntity.skills ?? []);
+        return cubit;
+      },
       child: Builder(
         builder:
             (context) => Scaffold(
@@ -105,7 +109,9 @@ class _SkillsPageState extends State<SkillsPage> {
                       child: ButtonWidget(
                         buttonType: ButtonType.outlined,
                         title: S.of(context).previous,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.maybePop();
+                        },
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -124,6 +130,13 @@ class _SkillsPageState extends State<SkillsPage> {
                                       buttonType: ButtonType.filled,
                                       title: S.of(context).next,
                                       onPressed: () {
+                                        final skillList =
+                                            context
+                                                .read<SkillManagerCubit>()
+                                                .skillList;
+                                        context
+                                            .read<VolunteerDataService>()
+                                            .saveSkills(skillList);
                                         // context.pushRoute();
                                       },
                                     );
