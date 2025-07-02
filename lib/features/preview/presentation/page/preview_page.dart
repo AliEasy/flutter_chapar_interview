@@ -1,9 +1,8 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chapar_interview/core/di/base/di_setup.dart';
-import 'package:flutter_chapar_interview/core/service/volunteer_data_service/entity/volunteer_entity.dart';
+import 'package:flutter_chapar_interview/core/service/volunteer_data_service/manager/volunteer_data_service_cubit.dart';
 import 'package:flutter_chapar_interview/core/uikit/button_widget.dart';
 import 'package:flutter_chapar_interview/core/uikit/scaffold_body_root_widget.dart';
 import 'package:flutter_chapar_interview/core/uikit/toast.dart';
@@ -12,12 +11,12 @@ import 'package:flutter_chapar_interview/generated/l10n.dart';
 
 @RoutePage()
 class PreviewPage extends StatelessWidget {
-  final VolunteerEntity volunteerEntity;
-
-  const PreviewPage({super.key, required this.volunteerEntity});
+  const PreviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final volunteer = context.read<VolunteerDataService>().volunteerData;
+
     return BlocProvider(
       create: (context) => getIt<SubmitDataCubit>(),
       child: BlocListener<SubmitDataCubit, SubmitDataState>(
@@ -56,7 +55,7 @@ class PreviewPage extends StatelessWidget {
                           Text('${S.of(context).full_name}: '),
                           Expanded(
                             child: Text(
-                              volunteerEntity.fullName ?? '',
+                              volunteer.fullName ?? '',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
@@ -69,7 +68,7 @@ class PreviewPage extends StatelessWidget {
                           Text('${S.of(context).email}: '),
                           Expanded(
                             child: Text(
-                              volunteerEntity.email ?? '',
+                              volunteer.email ?? '',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
@@ -82,7 +81,7 @@ class PreviewPage extends StatelessWidget {
                           Text('${S.of(context).phone}: '),
                           Expanded(
                             child: Text(
-                              volunteerEntity.phone ?? '',
+                              volunteer.phone ?? '',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
@@ -95,7 +94,7 @@ class PreviewPage extends StatelessWidget {
                           Text('${S.of(context).birthday}: '),
                           Expanded(
                             child: Text(
-                              volunteerEntity.birthday ?? '',
+                              volunteer.birthday ?? '',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
@@ -108,7 +107,7 @@ class PreviewPage extends StatelessWidget {
                           Text('${S.of(context).skills}: '),
                           Expanded(
                             child: Text(
-                              (volunteerEntity.skills ?? []).join(' - '),
+                              (volunteer.skills ?? []).join(' - '),
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
@@ -148,7 +147,7 @@ class PreviewPage extends StatelessWidget {
                                   title: S.of(context).submit,
                                   onPressed: () {
                                     context.read<SubmitDataCubit>().submitData(
-                                      volunteerEntity,
+                                      volunteer,
                                     );
                                   },
                                 );

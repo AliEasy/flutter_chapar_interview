@@ -25,4 +25,6 @@ class VolunteerDataService extends Cubit<VolunteerEntity> {
   void saveSkills(List<String> skills) {
     emit(state.copyWith(skills: skills));
   }
+
+  VolunteerEntity get volunteerData => state;
 }

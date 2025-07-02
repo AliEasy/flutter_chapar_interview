@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chapar_interview/core/di/base/di_setup.dart';
 import 'package:flutter_chapar_interview/core/di/routes/app_router.gr.dart';
-import 'package:flutter_chapar_interview/core/service/volunteer_data_service/entity/volunteer_entity.dart';
 import 'package:flutter_chapar_interview/core/service/volunteer_data_service/manager/volunteer_data_service_cubit.dart';
 import 'package:flutter_chapar_interview/core/uikit/button_widget.dart';
 import 'package:flutter_chapar_interview/core/uikit/scaffold_body_root_widget.dart';
@@ -15,9 +14,7 @@ import 'package:flutter_chapar_interview/generated/l10n.dart';
 
 @RoutePage()
 class SkillsPage extends StatefulWidget {
-  final VolunteerEntity volunteerEntity;
-
-  const SkillsPage({super.key, required this.volunteerEntity});
+  const SkillsPage({super.key});
 
   @override
   State<SkillsPage> createState() => _SkillsPageState();
@@ -31,7 +28,8 @@ class _SkillsPageState extends State<SkillsPage> {
     return BlocProvider(
       create: (context) {
         final cubit = getIt<SkillManagerCubit>();
-        cubit.addInitialData(widget.volunteerEntity.skills ?? []);
+        final volunteer = context.read<VolunteerDataService>().volunteerData;
+        cubit.addInitialData(volunteer.skills ?? []);
         return cubit;
       },
       child: Builder(
@@ -138,14 +136,7 @@ class _SkillsPageState extends State<SkillsPage> {
                                         context
                                             .read<VolunteerDataService>()
                                             .saveSkills(skillList);
-                                        context.pushRoute(
-                                          PreviewRoute(
-                                            volunteerEntity:
-                                                context
-                                                    .read<VolunteerDataService>()
-                                                    .state,
-                                          ),
-                                        );
+                                        context.pushRoute(const PreviewRoute());
                                       },
                                     );
                                   }

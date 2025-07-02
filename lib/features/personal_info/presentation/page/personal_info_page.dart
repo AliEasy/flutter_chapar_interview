@@ -110,14 +110,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                                             phone: _phoneController.text,
                                             birthday: _birthdayController.text,
                                           );
-                                      context.pushRoute(
-                                        SkillsRoute(
-                                          volunteerEntity:
-                                              context
-                                                  .read<VolunteerDataService>()
-                                                  .state,
-                                        ),
-                                      );
+                                      context.pushRoute(const SkillsRoute());
                                     }
                                     : null,
                           );
