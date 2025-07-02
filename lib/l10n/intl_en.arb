@@ -1,4 +1,19 @@
 {
   "@@locale": "en",
+  "personal_info": "Personal Info",
+  "full_name": "Full Name",
+  "full_name_is_required": "Full Name is required",
+  "full_name_min_char": "Full Name must be at least 3 characters",
+  "next": "Next",
+  "previous": "Previous",
+  "submit": "Submit",
+  "email": "Email",
+  "phone": "Phone",
+  "birthday": "Birthday",
+  "phone_or_email_must_be_provided": "Either Phone or Email must be provided",
+  "email_is_not_valid": "Email is not valid",
+  "phone_is_not_valid": "Phone is not valid",
+  "birthday_is_required": "Birthday is required",
+  "age_min_is_18": "You must be at least 18 years old",
   "end_of_file": ""
 }
