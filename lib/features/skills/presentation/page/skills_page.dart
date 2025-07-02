@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chapar_interview/core/di/base/di_setup.dart';
+import 'package:flutter_chapar_interview/core/di/routes/app_router.gr.dart';
 import 'package:flutter_chapar_interview/core/service/volunteer_data_service/entity/volunteer_entity.dart';
 import 'package:flutter_chapar_interview/core/service/volunteer_data_service/manager/volunteer_data_service_cubit.dart';
 import 'package:flutter_chapar_interview/core/uikit/button_widget.dart';
@@ -137,7 +138,14 @@ class _SkillsPageState extends State<SkillsPage> {
                                         context
                                             .read<VolunteerDataService>()
                                             .saveSkills(skillList);
-                                        // context.pushRoute();
+                                        context.pushRoute(
+                                          PreviewRoute(
+                                            volunteerEntity:
+                                                context
+                                                    .read<VolunteerDataService>()
+                                                    .state,
+                                          ),
+                                        );
                                       },
                                     );
                                   }
@@ -156,5 +164,11 @@ class _SkillsPageState extends State<SkillsPage> {
             ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _skillNameController.dispose();
+    super.dispose();
   }
 }
