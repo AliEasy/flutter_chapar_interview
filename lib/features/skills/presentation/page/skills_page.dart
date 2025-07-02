@@ -47,6 +47,10 @@ class _SkillsPageState extends State<SkillsPage> {
                           child: TextFormFieldWidget(
                             controller: _skillNameController,
                             label: S.of(context).skill_name,
+                            textInputAction: TextInputAction.done,
+                            onFieldSubmitted: (value) {
+                              FocusScope.of(context).unfocus();
+                            },
                           ),
                         ),
                         const SizedBox(width: 12),

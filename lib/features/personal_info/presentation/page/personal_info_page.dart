@@ -55,6 +55,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       label: S.of(context).email,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       textInputAction: TextInputAction.next,
+                      textFormFieldType: TextFormFieldType.email,
                       validator: (value) {
                         return context
                             .read<PersonalInfoFormValidatorCubit>()
@@ -67,6 +68,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       label: S.of(context).phone,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       textInputAction: TextInputAction.done,
+                      textFormFieldType: TextFormFieldType.phone,
                       onFieldSubmitted: (value) {
                         FocusScope.of(context).unfocus();
                       },
