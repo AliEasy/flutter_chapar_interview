@@ -55,4 +55,4 @@ This project uses **Clean Architecture** to separate responsibilities across lay
 
 - **Localization**: intl with .arb files, supporting multi-language extensibility.
 
-- **Navigation**: AutoRouter for navigating between pages
+- **Navigation**: AutoRoute for navigating between pages
