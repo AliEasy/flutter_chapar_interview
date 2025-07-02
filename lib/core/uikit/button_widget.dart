@@ -7,6 +7,7 @@ class ButtonWidget extends StatelessWidget {
   final ButtonType buttonType;
   final String? title;
   final Widget? icon;
+  final bool isLoading;
 
   const ButtonWidget({
     super.key,
@@ -14,6 +15,7 @@ class ButtonWidget extends StatelessWidget {
     required this.buttonType,
     this.title,
     this.icon,
+    this.isLoading = false,
   });
 
   @override
@@ -27,14 +29,24 @@ class ButtonWidget extends StatelessWidget {
   }
 
   Widget _child() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if (icon != null)
-          Padding(padding: const EdgeInsets.only(left: 5), child: icon!),
-        if (title?.isNotEmpty ?? false) Text(title!),
-      ],
-    );
+    if (!isLoading) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (icon != null)
+            Padding(padding: const EdgeInsets.only(left: 5), child: icon!),
+          if (title?.isNotEmpty ?? false) Text(title!),
+        ],
+      );
+    } else {
+      return const SizedBox(
+        height: 20,
+        width: 20,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
   }
 }
