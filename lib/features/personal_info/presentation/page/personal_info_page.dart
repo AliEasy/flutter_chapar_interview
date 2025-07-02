@@ -106,4 +106,14 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _birthdayController.dispose();
+
+    super.dispose();
+  }
 }
