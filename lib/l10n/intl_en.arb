@@ -15,5 +15,9 @@
   "phone_is_not_valid": "Phone is not valid",
   "birthday_is_required": "Birthday is required",
   "age_min_is_18": "You must be at least 18 years old",
+  "skill_name": "Skill Name",
+  "add_skill": "Add Skill",
+  "skill_minimum_to_continue": "At least 1 skill is required to continue",
+  "skills": "Skills",
   "end_of_file": ""
 }
