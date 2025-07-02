@@ -18,8 +18,8 @@ class SkillManagerCubit extends Cubit<SkillManagerState> {
   }
 
   addOrRemoveSkill(String skill) {
-    emit(const SkillManagerState.loading());
     if (skill.isNotEmpty) {
+      emit(const SkillManagerState.loading());
       final exists = _skillList.any((element) => element == skill);
       if (exists) {
         _skillList.remove(skill);
