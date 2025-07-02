@@ -102,6 +102,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                             onPressed:
                                 isEnabled
                                     ? () {
+                                      FocusScope.of(context).unfocus();
                                       context
                                           .read<VolunteerDataService>()
                                           .savePersonalInfo(

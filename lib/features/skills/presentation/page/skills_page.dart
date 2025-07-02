@@ -129,6 +129,7 @@ class _SkillsPageState extends State<SkillsPage> {
                                       buttonType: ButtonType.filled,
                                       title: S.of(context).next,
                                       onPressed: () {
+                                        FocusScope.of(context).unfocus();
                                         final skillList =
                                             context
                                                 .read<SkillManagerCubit>()
