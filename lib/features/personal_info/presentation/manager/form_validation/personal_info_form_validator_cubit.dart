@@ -14,23 +14,23 @@ class PersonalInfoFormValidatorCubit extends Cubit<PersonalInfoFormValidatorStat
   PersonalInfoFormValidatorCubit()
     : super(const PersonalInfoFormValidatorState.invalid());
 
-  PersonalInfoFormFieldsState _fullNameIsValid = PersonalInfoFormFieldsState.empty;
-  PersonalInfoFormFieldsState _emailIsValid = PersonalInfoFormFieldsState.empty;
-  PersonalInfoFormFieldsState _phoneIsValid = PersonalInfoFormFieldsState.empty;
+  PersonalInfoFormFieldsState _fullNameIsStatus = PersonalInfoFormFieldsState.empty;
+  PersonalInfoFormFieldsState _emailIsStatus = PersonalInfoFormFieldsState.empty;
+  PersonalInfoFormFieldsState _phoneIsStatus = PersonalInfoFormFieldsState.empty;
   PersonalInfoFormFieldsState _birthdayStatus = PersonalInfoFormFieldsState.empty;
 
   String? validateFullName(String? fullName) {
     final trimmed = fullName?.trim() ?? '';
     if (trimmed.length >= 3) {
-      _fullNameIsValid = PersonalInfoFormFieldsState.valid;
+      _fullNameIsStatus = PersonalInfoFormFieldsState.valid;
       _validateForm();
       return null;
     } else if (trimmed.isEmpty) {
-      _fullNameIsValid = PersonalInfoFormFieldsState.invalid;
+      _fullNameIsStatus = PersonalInfoFormFieldsState.invalid;
       _validateForm();
       return S.current.full_name_is_required;
     } else {
-      _fullNameIsValid = PersonalInfoFormFieldsState.invalid;
+      _fullNameIsStatus = PersonalInfoFormFieldsState.invalid;
       _validateForm();
       return S.current.full_name_min_char;
     }
@@ -41,18 +41,18 @@ class PersonalInfoFormValidatorCubit extends Cubit<PersonalInfoFormValidatorStat
     if (trimmed.isNotEmpty) {
       final isValid = RegExp(emailRegex).hasMatch(trimmed);
       if (isValid) {
-        _emailIsValid = PersonalInfoFormFieldsState.valid;
+        _emailIsStatus = PersonalInfoFormFieldsState.valid;
         _validateForm();
         return null;
       } else {
-        _emailIsValid = PersonalInfoFormFieldsState.invalid;
+        _emailIsStatus = PersonalInfoFormFieldsState.invalid;
         _validateForm();
         return S.current.email_is_not_valid;
       }
     } else {
-      _emailIsValid = PersonalInfoFormFieldsState.empty;
+      _emailIsStatus = PersonalInfoFormFieldsState.empty;
       _validateForm();
-      if (_phoneIsValid != PersonalInfoFormFieldsState.valid) {
+      if (_phoneIsStatus != PersonalInfoFormFieldsState.valid) {
         return S.current.phone_or_email_must_be_provided;
       } else {
         return null;
@@ -65,18 +65,18 @@ class PersonalInfoFormValidatorCubit extends Cubit<PersonalInfoFormValidatorStat
     if (trimmed.isNotEmpty) {
       final isValid = RegExp(iranMobileNumberRegex).hasMatch(trimmed);
       if (isValid) {
-        _phoneIsValid = PersonalInfoFormFieldsState.valid;
+        _phoneIsStatus = PersonalInfoFormFieldsState.valid;
         _validateForm();
         return null;
       } else {
-        _phoneIsValid = PersonalInfoFormFieldsState.invalid;
+        _phoneIsStatus = PersonalInfoFormFieldsState.invalid;
         _validateForm();
         return S.current.email_is_not_valid;
       }
     } else {
-      _phoneIsValid = PersonalInfoFormFieldsState.empty;
+      _phoneIsStatus = PersonalInfoFormFieldsState.empty;
       _validateForm();
-      if (_emailIsValid != PersonalInfoFormFieldsState.valid) {
+      if (_emailIsStatus != PersonalInfoFormFieldsState.valid) {
         return S.current.phone_or_email_must_be_provided;
       } else {
         return null;
@@ -104,11 +104,11 @@ class PersonalInfoFormValidatorCubit extends Cubit<PersonalInfoFormValidatorStat
   }
 
   _validateForm() {
-    if (_fullNameIsValid == PersonalInfoFormFieldsState.valid &&
-        ((_emailIsValid == PersonalInfoFormFieldsState.valid &&
-                _phoneIsValid != PersonalInfoFormFieldsState.invalid) ||
-            (_phoneIsValid == PersonalInfoFormFieldsState.valid &&
-                _emailIsValid != PersonalInfoFormFieldsState.invalid)) &&
+    if (_fullNameIsStatus == PersonalInfoFormFieldsState.valid &&
+        ((_emailIsStatus == PersonalInfoFormFieldsState.valid &&
+                _phoneIsStatus != PersonalInfoFormFieldsState.invalid) ||
+            (_phoneIsStatus == PersonalInfoFormFieldsState.valid &&
+                _emailIsStatus != PersonalInfoFormFieldsState.invalid)) &&
         _birthdayStatus == PersonalInfoFormFieldsState.valid) {
       emit(const PersonalInfoFormValidatorState.valid());
     } else {
